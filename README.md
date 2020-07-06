@@ -5,4 +5,7 @@ Pandas UDFs allow data scientists not only to scale out their workloads, but als
 - Apache Arrow, to exchange data directly between JVM and Python driver/executors with near-zero (de)serialization cost.
 - Pandas inside the function, to work with Pandas instances and APIs.
 
-The Pandas UDFs work with Pandas APIs inside the function and Apache Arrow for exchanging data. It allows vectorized operations that can increase performance up to 100x, compared to row-at-a-time Python UDFs.
+The Pandas UDFs work with Pandas APIs inside the function and Apache Arrow for exchanging data. It allows vectorized operations that can increase performance up to 100x, compared to row-at-a-time Python UDFs. For performance comparison between row-at-a-time UDFs and Pandas UDFs, you can have a look at [this](https://databricks.com/blog/2017/10/30/introducing-vectorized-udfs-for-pyspark.html).
+
+I stumbled across Pandas UDF while searching for efficient implementation of Linear Regression over grouped data in Pyspark. For my use case, I needed to train multiple Linear Regression Models and all my pythonic mind could think was nested for loops for filtering data at different level and then a final loop for training Regression Model for every dataset. Not to mention, the same inefficient way to be used for Prediction as well. Anybody who is new to Spark might take some time to realize that Loops are very bad practice in Spark due to lazy evaluation. For better explanation, check [this](https://stackoverflow.com/questions/54305007/pyspark-lazy-evaluation-in-loops-too-slow) out.
+
